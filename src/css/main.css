@@ -1,0 +1,106 @@
+
+body{
+    background-color: rgba(144, 183, 202, 0.4);
+}
+header{
+    background-color: rgb(88, 108, 116);
+    border: 3px solid black;
+    border-radius: 7px;
+    padding: 12px;
+    box-shadow: 1px 3px 6px 3px;
+    margin-bottom: 30px;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    color: gold;
+    text-decoration: none;
+}
+#logo{
+    fill: currentColor;
+}
+.game{
+    font-size: 35px;
+}
+
+main{
+    background-color: rgb(88, 108, 116);
+    border: 3px solid black;
+    border-radius: 7px;
+    padding: 12px;
+    box-shadow: 1px 3px 6px 3px;
+    margin-bottom: 30px;
+
+}
+.container{
+    display: flex;
+    align-items: center;
+    padding:60px 10px;
+    width:20
+}
+
+.ground{
+    display: grid;
+    grid-template-columns: repeat(8,90px);
+    grid-template-rows: repeat(8,90px);
+    row-gap: 4px;
+    column-gap: 4px;
+    width: 70%;
+    border-right: 2px solid gold;
+}
+
+.stylus{
+    font-size: 40px;
+    color: gold;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+.plate{
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: .8;
+    width: 90px;
+    height: 90px;
+
+}
+.plate:focus{
+    margin-top: -3.5px;
+    margin-left:  -3.5px;
+    width: 95px;
+    height: 95px;
+    opacity: 1.5;
+    border: 1px solid rgb(3, 8, 10);
+}
+
+.black{
+    background-color: gray;
+}
+.white{
+    background-color: gold;
+}
+
+
+
+
+footer{
+    background-color: rgb(88, 108, 116);
+    border: 3px solid black;
+    border-radius: 7px;
+    padding: 12px;
+    box-shadow: 1px 3px 6px 3px;
+    margin-bottom: 50px;
+}
+
+img{
+    width:40px;
+    fill: white;
+    color: color;
+    pointer-events: none;
+}
