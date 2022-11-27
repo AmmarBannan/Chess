@@ -19,24 +19,26 @@ export function savePosition(characters){
 }
 export function checkBetween(move,plate,charactersTeam1,charactersTeam2,positionTeam1,positionTeam2,change,attack,changePlayer){
     let positions ;let opponent
-            if(move.from.team){positions=positionTeam2;opponent=positionTeam1}else{positions=positionTeam1;opponent=positionTeam2}
-            let canMove=move.from.moveStep(NumberToPosition(plate.position),positions,opponent,attack)
-            if(canMove){
-                if(canMove==="only_Move"&&attack) return false
-                move.to=NumberToPosition(plate.position)
-                if(attack){
-                    let aim=getCharacterByPosition(plate.position)
-                    if(aim[1]!=null){
-                        aim[0].splice(aim[1],1)
-                    }
-                    else{
-                        let char=aim[0]
-                        opponent==positionTeam1?delete charactersTeam1[char]:delete charactersTeam2[char]
-                        opponent==positionTeam1?delete console.log(charactersTeam1):console.log(charactersTeam2)
-                    }
-                }
-                move.from.team?changePlayer(true):changePlayer(false)
-                change(prev=>prev+=1)
-                move.from.setPosition(move.to)
+    if(move.team){positions=positionTeam2;opponent=positionTeam1}else{positions=positionTeam1;opponent=positionTeam2}
+    let moveTo=NumberToPosition(plate.position)
+    let canMove=move.moveStep(moveTo,positions,opponent,attack)
+    if(canMove){
+        if(attack){
+            let aim=getCharacterByPosition(plate.position) //has character key and position and index if soldier
+            if(canMove==="only_Move") return false
+            else if(aim[1]!=null){
+                aim[0].splice(aim[1],1)
             }
+            else{
+                let char=aim[0]
+                opponent===positionTeam1?delete charactersTeam1[char]:delete charactersTeam2[char]
+                opponent===positionTeam1?delete console.log(charactersTeam1):console.log(charactersTeam2)
+            }
+        }
+        move.team?changePlayer(true):changePlayer(false)
+        change(prev=>prev+1)
+        move.setPosition(moveTo)
+        return true
+    }
+    return false
 }

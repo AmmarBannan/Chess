@@ -1,6 +1,6 @@
 import {drag} from "../function/Drag"
 export class character{
-    constructor(name,positionX,positionY,moves,id,team,alive=true){
+    constructor(name,positionX,positionY,moves,scope,id,team,alive=true){
         this.name=name;
         this.positionX=positionX;
         this.positionY=positionY;
@@ -8,6 +8,7 @@ export class character{
         this.alive=alive
         this.id=id
         this.team=team
+        this.scope=scope
     }
     getID(){
         return this.id
@@ -46,7 +47,14 @@ export class character{
                 let canMove=move(this.getPosition(),{xNew,yNew},teamPositions,opponentPosition,this.getTeam(),attack)
                 if(canMove)return canMove
             }
-            return false
+           
+    }
+    scopeRange(teamPositions,opponentPosition){
+        let possibilities=[]
+        for(let possibility of this.scope){
+            possibilities=possibilities.concat(possibility(this.positionX,this.positionY,teamPositions,opponentPosition,this.team))
+        }
+        return possibilities
     }
 }
 
