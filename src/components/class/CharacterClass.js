@@ -32,22 +32,23 @@ export class character{
         return <img src={img}
                     id={"id-"+this.name+this.id}
                     alt={this.name}
-                    draggable="true" 
                     onDragStart={e=>drag(e)}></img>
     };
     getPosition(){
         return {x:this.positionX,y:this.positionY};
     };
     setPosition(position){
-        this.positionX=position.xNew;
-        this.positionY=position.yNew;
+        let cord=Object.values(position)
+        this.positionX=cord[0];
+        this.positionY=cord[1];
     };
     moveStep({xNew,yNew},teamPositions,opponentPosition,attack){
+        let canMove
         for(let move of this.moves){
-                let canMove=move(this.getPosition(),{xNew,yNew},teamPositions,opponentPosition,this.getTeam(),attack)
+                canMove=move(this.getPosition(),{xNew,yNew},teamPositions,opponentPosition,this.getTeam(),attack)
                 if(canMove)return canMove
             }
-           
+        return false
     }
     scopeRange(teamPositions,opponentPosition){
         let possibilities=[]

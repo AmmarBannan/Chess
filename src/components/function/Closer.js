@@ -11,7 +11,6 @@ export function orthogonal(x,y,team,opponent) {
     return steps
 }
 export function cross(x,y,team,opponent) {
-   
     let ul=true,ur=true,dl=true,dr=true
     let steps=[]
     let left=y-1,right=y+1,up=x-1,down=x+1
@@ -46,6 +45,7 @@ export function L_move(x,y,team){
     return steps
 }
 export function two_step(x,y,team){
+
     if(x==1&&!hasPosition(team,x+1,y)&&!hasPosition(team,x+2,y))return [{x:x+2,y:y}]
     if(x==6&&!hasPosition(team,x-1,y)&&!hasPosition(team,x+2,y))return [{x:x-2,y:y}]
     return []
@@ -53,7 +53,7 @@ export function two_step(x,y,team){
 export function one_step(x,y,team,opponent,teamNumber){
     let direction=teamNumber?-1:1
     let steps=[]
-    if(!hasPosition(team,x+direction,y))steps.push({x:x+direction,y:y})
+    if(!hasPosition(team,x+direction,y)&&!hasPosition(opponent,x+direction,y))steps.push({x:x+direction,y:y})
     if(hasPosition(opponent,x+direction,y+1))steps.push({x:x+direction,y:y+1})
     if(hasPosition(opponent,x+direction,y-1))steps.push({x:x+direction,y:y-1})
     return steps

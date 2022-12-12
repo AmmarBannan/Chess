@@ -25,23 +25,17 @@ let move={
                 }
                 return  true;
             }
-            else{console.log("test2")
+            else{
                 return false;}
         },
     "cross":({x,y},{xNew,yNew},positions,opponent,team)=>{
-        let {xLarge,xSmall,yLarge,ySmall}=move.order(x,y,xNew,yNew)
             let xSlope=xNew-x;
             let ySlope=yNew-y;
             if(Math.abs(ySlope/xSlope)===1){
-                for(let cord of [...positions,...opponent]){
-                    if(Math.sign(cord.x-x)==Math.sign(xSlope)&&Math.sign(cord.y-y)==Math.sign(ySlope)&&ySlope/xSlope==(cord.y-y/cord.x-x)){
-                        return false
-                    }
-                }                    
-                return  true;
+                let cantCross=[...positions,...opponent].filter((cord)=>cord.x===x+Math.sign(xSlope)&&cord.y===y+Math.sign(ySlope))
+                return cantCross.length===0?true:false            
             }
-            else{
-                return false}
+            else{return false}
         },
     "L":({x,y},{xNew,yNew},positions,opponent,team)=>{
             if(Math.abs(yNew-y)==2 && Math.abs(xNew-x)==1 || Math.abs(xNew-x)==2 && Math.abs(yNew-y)==1 ){
@@ -51,7 +45,7 @@ let move={
         },
     "one_step":({x,y},{xNew,yNew},positions,opponent,team)=>{
         let direction=1
-        if(team){direction=-1;if(x<xNew)return false}else{if(x>xNew){console.log("false",x,xNew);return false}}
+        if(team){direction=-1;if(x<xNew)return false}else{if(x>xNew)return false}
         if(Math.abs(xNew-x)==1 && y==yNew ){ return "only_Move";}else{return false}
         },
     "two_step":({x,y},{xNew,yNew},positions,opponent,team)=>{
@@ -60,7 +54,6 @@ let move={
         if(3==xNew && direction>0 && y==yNew || 4==xNew && direction<0 && y==yNew ){
             for(let cord of [...positions,...opponent]){
                 if(cord.x==x+direction&&y==cord.y){
-                    console.log(x,y,"cord :",cord.x,cord.y)
                     return false
                 }
             }
@@ -104,7 +97,7 @@ function soldiersCreator(team){
 }
 
 export const charactersTeam1={
-    team:0,
+    "team":0,
     "queen_0":new character("queen",0,4,[move.queen],[scope.queen],"1",0),
     "king_0":new character("king",0,3,[move.orthogonal,move.cross],[scope.orthogonal,scope.cross],"2",0),
     
@@ -120,7 +113,8 @@ export const charactersTeam1={
     "soldiers_0":soldiersCreator(0)       
 }
 export const charactersTeam2={
-    team:1,
+    "team":1,
+    //7,4
     "queen_1":new character("queen",7,4,[move.queen],[scope.queen],"1",1),
     "king_1":new character("king",7,3,[move.orthogonal,move.cross],[scope.orthogonal,scope.cross],"2",1),
     

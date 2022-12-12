@@ -35,9 +35,9 @@ export function checkBetween(move,plate,charactersTeam1,charactersTeam2,position
                 opponent===positionTeam1?delete console.log(charactersTeam1):console.log(charactersTeam2)
             }
         }
-        move.team?changePlayer(true):changePlayer(false)
-        change(prev=>prev+1)
-        move.setPosition(moveTo)
+        // if(underThreat){return false}
+        // else{
+        // underThreat
         return true
     }
     return false

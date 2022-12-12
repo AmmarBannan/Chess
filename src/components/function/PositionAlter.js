@@ -1,12 +1,17 @@
 import React from 'react'
-import {charactersTeam1,charactersTeam2} from "../components/Characters"
+import {charactersTeam1,charactersTeam2} from "../Renders/Characters"
 
 export function NumberToPosition(num) {
     return {xNew:Math.floor(num/8),yNew:num%8}
 }
 
-export function PositionToNumber(x,y) {
-    return x*8+y
+export function PositionToNumber(...args) {
+   
+    if(typeof args[0]==="object"){
+        let cord=Object.values(args[0])
+        return cord[0]*8+cord[1]
+    }
+    return args[0]*8+args[1]
 }
 
 export function getCharacterByPosition(position){
