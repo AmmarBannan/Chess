@@ -53,20 +53,29 @@ export default function ChessGam(){
             i++
         }
     }
-    console.log("ccccoooool:",color)
     useEffect(() => {
         const items = JSON.parse(localStorage.getItem('items'))
-        const colors = JSON.parse(localStorage.getItem('color'))
         if (items) {
             if(items.stepNumber){
             save(items);
             update(charactersTeam1,items.team1)
             update(charactersTeam2,items.team2)}
         }
-        if(colors){setColor(colors);console.log("YEEES")}
+       
       }, [])
+    useEffect(()=>{
+        const colors = JSON.parse(localStorage.getItem('color'))
+        console.log("colors:",colors)
+        if(JSON.stringify(colors)!==JSON.stringify(color) && colors){
+            console.log("ture",color,colors,"fdsf")
+            setColor(colors)
+            console.log("first color set",colors,"color:",color)
+        }else{
+            localStorage.setItem('color', JSON.stringify(color))
+        }
+    },[])
 
-    useEffect(()=>{console.log(color);if(color)localStorage.setItem('color', JSON.stringify(color))},[color])
+    useEffect(()=>{if(color)localStorage.setItem('color', JSON.stringify(color))},[color])
 
     useEffect(() => {if(load)localStorage.setItem('items', JSON.stringify(load))}, [load])
     if(changed<load.stepNumber){console.log("pass");change(load.stepNumber)}
@@ -128,7 +137,6 @@ export default function ChessGam(){
         paths={team1:AllPaths(charactersTeam1,charactersTeam2),team2:AllPaths(charactersTeam2,charactersTeam1)}
         setScope([])
         select(null)
-        console.log("which",load.stepNumber,changed)
         if(changed>load.stepNumber)save({team1:positionTeam1,team2:positionTeam2,turn:player,stepNumber:changed})
     },[changed])
 

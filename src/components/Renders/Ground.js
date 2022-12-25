@@ -49,6 +49,7 @@ function Plates(props) {
     }
     let tablet=blocks.map((plate,index)=>{ 
         let color=plate.color
+        console.log("117:",props.color[color])
         return <div 
             className={"plate"+plate.selected}
             style={{"backgroundColor":props.color[color]}}
