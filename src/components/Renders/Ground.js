@@ -9,7 +9,6 @@ function Field(arr) {
     let i=0
     let color="color1"
     let plates=[]
-    // console.log("contractor",arr.includes(i))
     while(i<64){
         if(i%8)color=color==='color2'?'color1':'color2'
         if(arr.includes(i)){plates.push({color:color,character:null,position:i,selected:' red'})}
@@ -49,7 +48,6 @@ function Plates(props) {
     }
     let tablet=blocks.map((plate,index)=>{ 
         let color=plate.color
-        console.log("117:",props.color[color])
         return <div 
             className={"plate"+plate.selected}
             style={{"backgroundColor":props.color[color]}}

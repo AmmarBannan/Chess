@@ -65,11 +65,8 @@ export default function ChessGam(){
       }, [])
     useEffect(()=>{
         const colors = JSON.parse(localStorage.getItem('color'))
-        console.log("colors:",colors)
         if(JSON.stringify(colors)!==JSON.stringify(color) && colors){
-            console.log("ture",color,colors,"fdsf")
             setColor(colors)
-            console.log("first color set",colors,"color:",color)
         }else{
             localStorage.setItem('color', JSON.stringify(color))
         }
@@ -78,9 +75,8 @@ export default function ChessGam(){
     useEffect(()=>{if(color)localStorage.setItem('color', JSON.stringify(color))},[color])
 
     useEffect(() => {if(load)localStorage.setItem('items', JSON.stringify(load))}, [load])
-    if(changed<load.stepNumber){console.log("pass");change(load.stepNumber)}
+    if(changed<load.stepNumber){change(load.stepNumber)}
     function onClickHandler(plate){
-        console.log("check1 odd",changed,changed%2==0)
         if(plate.character){ //character 
             try{
                 if(changed%2==0){if(plate.character.team===1 && selected.team===1)return 0}
@@ -158,7 +154,7 @@ export default function ChessGam(){
         <main>
         
          <Plates  plates={()=>AddCharacter()}  clickHandler={(e)=>onClickHandler(e)} scope={circle} cursor={selected}  hovering={(e)=>findPath(e)} color={color}/>
-         <SupportBtn clickHandler={()=>{setShowPaths(prev=>!prev);console.log("show_paths:",showPaths)}}/>
+         <SupportBtn clickHandler={()=>{setShowPaths(prev=>!prev)}}/>
          <StartOver clickHandler={()=>reset()}/>
          <Color changeColor={setColor} lastColor={color}/>
         </main>
